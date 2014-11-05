@@ -1,5 +1,5 @@
 /*
-毕老师用电脑上课    //名词提炼法 毕老师 电脑
+老师用电脑上课    //名词提炼法 老师 电脑
 
 开始思考上课中出现的问题
 
@@ -10,7 +10,7 @@
  要对问题进行描述，封装成对象
  
 可是当冒烟发生后，出现讲课进度无法继续。
-出现了讲师的问题:课时计划无法完成
+出现了老师的问题:课时计划无法完成
 */  
 
 class LanPingException extends Exception
@@ -79,7 +79,7 @@ class Teacher
     	catch(MaoYanException e)
     	{
     		test();
-    	  throw new NoPlanException("课时无法继续"+e.getMessage()); 	
+    	  throw new NoPlanException("课程无法继续"+e.getMessage()); 	
     	  //test();在throw之后不会被执行到
     	}
         
@@ -96,7 +96,7 @@ class ExceptionTest
 {
 	public static void main(String[] args)
 	{
-	  Teacher t = new Teacher("毕老师");
+	  Teacher t = new Teacher("老师");
 	  
 	  try
 	  {
@@ -105,7 +105,7 @@ class ExceptionTest
 	  catch(NoPlanException e)
 	  {
 	  	System.out.println(e.toString());
-	  	System.out.println("换老师或者放假");
+	  	System.out.println("放假");
 	  }
 	}	
 }
