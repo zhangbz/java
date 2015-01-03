@@ -22,43 +22,44 @@ class Test
 	private void init()
 	{
 	    f = new JFrame("Test");
-	    f.setBounds(300, 100, 600, 500);
-	    //f.setResizable(false);
+		f.setBounds(300, 100, 600, 500);
+		//f.setResizable(false);
 		
-	    l = new JLabel("任务列表");
-	    p = new JPanel();
-	    p.setLayout(new GridLayout(10,1));
-	    //p.setBackground(Color.red);
-	    cb = new JCheckBox("checkbox");
-	    cb.setVisible(false);
+		l = new JLabel("任务列表");
+		p = new JPanel();
+		p.setLayout(new GridLayout(10,1));
+		//p.setBackground(Color.red);
+		cb = new JCheckBox("checkbox");
+		cb.setVisible(false);
 		
-	    p_b = new JPanel(new GridLayout(1,3));
 		
-	    bt_add = new JButton("Add");
-	    bt_rm = new JButton("Remove");
-	    bt_scan = new JButton("Scan");
+		p_b = new JPanel(new GridLayout(1,3));
 		
-	    p.add(cb);
+		bt_add = new JButton("Add");
+		bt_rm = new JButton("Remove");
+		bt_scan = new JButton("Scan");
 		
-	    p_b.add(bt_add);
-	    p_b.add(bt_scan);
-	    p_b.add(bt_rm);
+		p.add(cb);
 		
-	    fc = new JFileChooser();
-	    fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-	    openDia = new FileDialog(f, "open", FileDialog.LOAD);
-	  
-	    //p.add(bt1);
-	    //p.add(bt2);
-	    //p.add(bt3);
+		p_b.add(bt_add);
+		p_b.add(bt_scan);
+		p_b.add(bt_rm);
 		
-	    f.add(l, BorderLayout.NORTH);
-	    f.add(p, BorderLayout.CENTER);
-	    f.add(p_b,BorderLayout.SOUTH);
+		fc = new JFileChooser();
+		fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+		openDia = new FileDialog(f, "open", FileDialog.LOAD);
 		
-	    myEvent();
+		//p.add(bt1);
+		//p.add(bt2);
+		//p.add(bt3);
 		
-	    f.setVisible(true);
+		f.add(l, BorderLayout.NORTH);
+		f.add(p, BorderLayout.CENTER);
+		f.add(p_b,BorderLayout.SOUTH);
+		
+		myEvent();
+		
+		f.setVisible(true);
 	}
 	
 	private void  myEvent()
