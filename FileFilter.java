@@ -71,75 +71,75 @@ class FileFilter
 	{
 	    //按钮绑定事件
 	    bt_rm.addActionListener(new ActionListener()
-		{
-		    public void actionPerformed(ActionEvent e)
+	    {
+	        public void actionPerformed(ActionEvent e)
+	 	{
+		    for(JCheckBox cb: cbal)
+		    {
+	                if(cb.isSelected())
 			{
-			    for(JCheckBox cb: cbal)
-				{
-				    if(cb.isSelected())
-					{
-					    cb.setVisible(false);
-						p.remove(cb);
-						cb.setSelected(false);
-					}
-				}
+			    cb.setVisible(false);
+		            p.remove(cb);
+	              	    cb.setSelected(false);
 			}
-		});
+		    }
+		}
+	    });
 	    bt_scan.addActionListener(new ActionListener ()
+	    {
+	        public void actionPerformed(ActionEvent e)
 		{
-		    public void actionPerformed(ActionEvent e)
-			{
-			    ta.setText("");
-			    for( JCheckBox cb : cbal)
-				{
+		    ta.setText("");
+		    for( JCheckBox cb : cbal)
+	   	    {
 				    
-				    if(cb.isSelected())
-					{
-						dir = new File(cb.getText());
-						File[] fl = dir.listFiles();
-						//System.out.println(fl.length);
-						for(int i = 0; i < fl.length - 1; i++ )
-						{
-							if(check(fl[i]))
-								continue;
-							for(int j = i+1; j < fl.length; j++)
-							{
-								compare(fl[i], fl[j]);
-							}	   
-						}
-						
-						for(int i = 0; i < fl.length; i++ )
-						{
-						    if(fl[i].getName().startsWith("resultAbout"))
-							{
-							    show(fl[i]);
-							}
-						}
-					}				
-				}
-			}
-		});
-	    bt_add.addActionListener(new ActionListener()
-		{
-		    public void actionPerformed(ActionEvent e)
+	   	        if(cb.isSelected())
 			{
-			    fc.showOpenDialog(f);
-				String dirPath = fc.getSelectedFile().toString();
+	    	    	    dir = new File(cb.getText());
+	    	   	    File[] fl = dir.listFiles();
+			    //System.out.println(fl.length);
+	  		    for(int i = 0; i < fl.length - 1; i++ )
+			    {
+				if(check(fl[i]))
+				    continue;
+				for(int j = i+1; j < fl.length; j++)
+				{
+				    compare(fl[i], fl[j]);
+				}	   
+			    }
+						
+	  		    for(int i = 0; i < fl.length; i++ )
+			    {
+			        if(fl[i].getName().startsWith("resultAbout"))
+				{
+			            show(fl[i]);
+				}
+			    }
+			}				
+	            }
+		}
+	});
+	bt_add.addActionListener(new ActionListener()
+        {
+	    public void actionPerformed(ActionEvent e)
+	    {
+	        fc.showOpenDialog(f);
+		String dirPath = fc.getSelectedFile().toString();
                 
                 if(dirPath == null )
                     return;
                 
-				file = new File(dirPath);
+		file = new File(dirPath);
 				
-				cb = new JCheckBox(dirPath);
-				cb.setSelected(true);
-				p.add(cb);
-				cbal.add(cb);
-				p.updateUI();
+		cb = new JCheckBox(dirPath);
+		cb.setSelected(true);
+		p.add(cb);
+		cbal.add(cb);
+		p.updateUI();
 				
-			}
-		});
-	}
+	    }
+        });
+    }
 	
 	//显示结果
 	private void show(File f)
