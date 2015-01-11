@@ -144,75 +144,75 @@ class FileFilter
 	//显示结果
 	private void show(File f)
 	{		
-		File file = new File(f.getAbsoluteFile().toString());
+	    File file = new File(f.getAbsoluteFile().toString());
 				
-		if(file.exists())
+	    if(file.exists())
+	    {
+		try
 		{
-			try
-			{
-				BufferedReader bufr = new BufferedReader(new FileReader(file));
-				String line = null;
-				while((line = bufr.readLine())!=null)
-				{
-					ta.append(line+"\r\n");
-				}
-				ta.append("-----------------------------------
-				           -----------------------------\r\n");
-				bufr.close();
-			}
-			catch(IOException s)
-			{
-				throw new RuntimeException("read failed");
-			}
+		    BufferedReader bufr = new BufferedReader(new FileReader(file));
+		    String line = null;
+		    while((line = bufr.readLine())!=null)
+		    {
+			ta.append(line+"\r\n");
+		    }
+		    ta.append("-----------------------------------
+	         	       -----------------------------\r\n");
+	            bufr.close();
 		}
-		else
+		catch(IOException s)
 		{
+		    throw new RuntimeException("read failed");
 		}
+	    }
+	    else
+	    {
+	    }
 	}
 	
 	//文件比较
 	private void compare(File file1, File file2)
 	{
 	    try
+	    {
+	        FileInputStream fis1 = new FileInputStream(file1.getAbsoluteFile().toString());
+		FileInputStream fis2 = new FileInputStream(file2.getAbsoluteFile().toString());
+		int len1 = fis1.available();
+		int len2 = fis2.available();
+		if(len1 == len2) 
 		{
-			FileInputStream fis1 = new FileInputStream(file1.getAbsoluteFile().toString());
-			FileInputStream fis2 = new FileInputStream(file2.getAbsoluteFile().toString());
-			int len1 = fis1.available();
-			int len2 = fis2.available();
-			if(len1 == len2) 
+		    byte[] data1 = new byte[len1];
+		    byte[] data2 = new byte[len2];
+				
+		    fis1.read(data1);
+		    fis2.read(data2);
+				
+		    for(int i = 0; i < len1; i++)
+		    {
+			if(data1[i] != data2[i])
 			{
-				byte[] data1 = new byte[len1];
-				byte[] data2 = new byte[len2];
-				
-				fis1.read(data1);
-				fis2.read(data2);
-				
-				for(int i = 0; i < len1; i++)
-				{
-					if(data1[i] != data2[i])
-					{
-						//System.out.System.out.println(file1.getAbsoluteFile().toString() 
-						                  //  + file2.getAbsoluteFile().toString() + "文件内容不一样");
-						return;
-					}
-				}
-				//System.out.println(file1.getAbsoluteFile().toString() 
-				                  //  + file2.getAbsoluteFile().toString() +  "文件内容一样");
-				result(file1.getAbsoluteFile().toString(), file2.getAbsoluteFile().toString());
-				
+			    //System.out.System.out.println(file1.getAbsoluteFile().toString() 
+			                                 //  + file2.getAbsoluteFile().toString() + "文件内容不一样");
+			    return;
 			}
-			else
-			{
-			   // System.out.println(file1.getAbsoluteFile().toString() 
-				              //      + file2.getAbsoluteFile().toString() +  "文件内容不一样");
-			}
+		    }
+		    //System.out.println(file1.getAbsoluteFile().toString() 
+				      //  + file2.getAbsoluteFile().toString() +  "文件内容一样");
+		    result(file1.getAbsoluteFile().toString(), file2.getAbsoluteFile().toString());
+				
 		}
-		catch(Exception e)
+		else
 		{
-		    e.printStackTrace();
+	            // System.out.println(file1.getAbsoluteFile().toString() 
+				  //      + file2.getAbsoluteFile().toString() +  "文件内容不一样");
 		}
+	    }
+	    catch(Exception e)
+	    {
+                e.printStackTrace();
+	    }
 	    
-	}
+        }
 	
 	//保存结果到文件
 	public void result(String fileName1, String fileName2)
