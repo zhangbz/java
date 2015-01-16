@@ -217,69 +217,68 @@ class FileFilter
 	//保存结果到文件
 	public void result(String fileName1, String fileName2)
 	{
-		String resultPath = dir + "\\resultAbout" + new File(fileName1).getName() + ".txt";
-		File resultFile = new File(resultPath);
-		if(!resultFile.exists())
+	    String resultPath = dir + "\\resultAbout" + new File(fileName1).getName() + ".txt";
+	    File resultFile = new File(resultPath);
+	    if(!resultFile.exists())
+	    {
+		FileOutputStream fos = null;
+		try
 		{
-			FileOutputStream fos = null;
-			try
-			{
-			    resultFile.createNewFile();
-			    fos = new FileOutputStream(resultFile, true); 
-				byte[] b1 = fileName1.getBytes();
-				byte[] b2 = "\r\n".getBytes();
-				byte[] b3 = fileName2.getBytes();
+		    resultFile.createNewFile();
+		    fos = new FileOutputStream(resultFile, true); 
+		    byte[] b1 = fileName1.getBytes();
+		    byte[] b2 = "\r\n".getBytes();
+		    byte[] b3 = fileName2.getBytes();
 				
-				fos.write(b1);
-				fos.write(b2);
-				fos.write(b3);
-				fos.write(b2);
+		    fos.write(b1);
+		    fos.write(b2);
+		    fos.write(b3);
+		    fos.write(b2);
 				
-			}
-			catch(Exception e)
-			{
-			    e.printStackTrace();
-			}
-			finally
-			{
-			    try
-				{
-				    fos.close();
-				}
-				catch(Exception e)
-				{
-				}
-			}
-
 		}
-		else
+		catch(Exception e)
 		{
-			FileOutputStream fos = null; 
-
-			try
-			{
-			    fos = new FileOutputStream(resultFile, true); 
-				byte[] b1 = fileName2.getBytes();
-				byte[] b2 = "\r\n".getBytes();
-				fos.write(b1);
-				fos.write(b2);
-				
-			}
-			catch(Exception e)
-			{
-			    e.printStackTrace();
-			}
-			finally
-			{
-			    try
-				{
-				    fos.close();
-				}
-				catch(Exception e)
-				{
-				}
+		    e.printStackTrace();
+		}
+		finally
+		{
+		    try
+		    {
+		        fos.close();
+		    }
+		    catch(Exception e)
+	    	    {
 		    }
 		}
+
+	    }
+	    else
+	    {
+		FileOutputStream fos = null; 
+
+		try
+		{
+		    fos = new FileOutputStream(resultFile, true); 
+		    byte[] b1 = fileName2.getBytes();
+		    byte[] b2 = "\r\n".getBytes();
+		    fos.write(b1);
+		    fos.write(b2);		
+		}
+		catch(Exception e)
+		{
+	            e.printStackTrace();
+		}
+		finally
+		{
+		    try
+		    {
+		        fos.close();
+		    }
+		    catch(Exception e)
+		    {
+		    }
+		}
+	    }
 	}
 	
 	//判断文件是否已经被检出

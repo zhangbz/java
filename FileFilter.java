@@ -281,60 +281,60 @@ class FileFilter
 	    }
 	}
 	
-	//判断文件是否已经被检出
-	private boolean check(File cf)
+    //判断文件是否已经被检出
+    private boolean check(File cf)
+    {
+	File[] resultAboutFileList = dir.listFiles();
+	for(int i = 0; i < resultAboutFileList.length; i++)
 	{
-		File[] resultAboutFileList = dir.listFiles();
-		for(int i = 0; i < resultAboutFileList.length; i++)
-		{
-			if(!resultAboutFileList[i].getName().startsWith("resultAbout"))
-			{
-				resultAboutFileList[i] = null;
-			}
-		}
+	    if(!resultAboutFileList[i].getName().startsWith("resultAbout"))
+	    {
+		resultAboutFileList[i] = null;
+            }
+	}
 		
-		for(int i = 0; i < resultAboutFileList.length; i++)
-		{
-		    if(resultAboutFileList[i] != null)
-			{
-				FileInputStream fis = null;
-				FileReader reader = null;
-				BufferedReader br = null;
-				try
-				{
-					String str = null;
-					reader = new FileReader(dir + "\\" + resultAboutFileList[i].getName().toString());
-					br = new BufferedReader(reader);
-					while((str = br.readLine()) != null)
-					{
-					    //System.out.println(str);
-						if(str.equals(cf.getAbsoluteFile().toString()))
-							return true;			
-					}
-				}
-				catch(Exception e)
-				{
-					e.printStackTrace();
-				}
-				finally
-				{
-					try
-					{
-						br.close();
-						reader.close();	
-					}
-					catch(Exception e)
-					{
-					}		   
-				}
-			}
-		}
-		return false;
-	}
-	
-	//main函数
-	public static void main(String[] args)
+	for(int i = 0; i < resultAboutFileList.length; i++)
 	{
-	    new FileFilter();
+	    if(resultAboutFileList[i] != null)
+	    {
+	        FileInputStream fis = null;
+		FileReader reader = null;
+		BufferedReader br = null;
+		try
+		{
+		    String str = null;
+		    reader = new FileReader(dir + "\\" + resultAboutFileList[i].getName().toString());
+		    br = new BufferedReader(reader);
+		    while((str = br.readLine()) != null)
+		    {
+			//System.out.println(str);
+		        if(str.equals(cf.getAbsoluteFile().toString()))
+			    return true;			
+	       	    }
+		}
+		catch(Exception e)
+		{
+		    e.printStackTrace();
+		}
+		finally
+	        {
+		    try
+		    {
+		        br.close();
+		        reader.close();	
+		    }
+		    catch(Exception e)
+		    {
+		    }		   
+	        }
+            }
 	}
+	return false;
+    }
+	
+    //main函数
+    public static void main(String[] args)
+    {
+        new FileFilter();
+    }
 }
